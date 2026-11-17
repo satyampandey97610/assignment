@@ -1,0 +1,42 @@
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "200000000000001",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "911240009000",
+              "phone_number_id": "100000000000001"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "Pooja Agarwal"
+                },
+                "wa_id": "919999000011"
+              }
+            ],
+            "messages": [
+              {
+                "from": "919999000011",
+                "id": "wamid.HBgMOTE5OTk5MDAwMDExFQIAEhgUNEY2QTNEOEIyRTFDNTA5RDdBMDgA",
+                "timestamp": "1794628110",
+                "type": "image",
+                "image": {
+                  "caption": "ye report dekh lo",
+                  "mime_type": "image/jpeg",
+                  "sha256": "Zm9vYmFyYmF6cXV4c2FtcGxlaW1hZ2VoYXNoMDAwMDA=",
+                  "id": "300000000000001"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}

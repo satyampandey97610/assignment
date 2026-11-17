@@ -1,0 +1,12 @@
+{
+  "app_secret": "care-concierge-test-secret",
+  "header": "X-Hub-Signature-256",
+  "signatures": {
+    "01_status_delivered.json": "sha256=fd409522284c729d8784b4ee3772940973c3b40051506a43daa454ffd6dec3d6",
+    "02_text_booking_hinglish.json": "sha256=394d980a5529df6cafe794ae13df8bd9f8deb16ebae894576dba3504cf34d815",
+    "03_text_clinic_info_hindi.json": "sha256=ebb7eeff4ff2b48f4336c9a225e41696f5556ee2134ab9157abe9badc9f69583",
+    "04_text_emergency_english.json": "sha256=c9f3458da4bdf4914c34182e5bf124342b73bcad6732f0a6c9c406c87d8c341b",
+    "05_text_booking_hinglish_redelivery.json": "sha256=394d980a5529df6cafe794ae13df8bd9f8deb16ebae894576dba3504cf34d815",
+    "06_image_unsupported.json": "sha256=59a1241adbb9212b3ec128996186aa64cefceb6c1241863773761adc3bc4f555"
+  }
+}
