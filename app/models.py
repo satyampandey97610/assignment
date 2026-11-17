@@ -142,12 +142,7 @@ class SymptomLog(Base):
     society_id: Mapped[str] = mapped_column(Text, ForeignKey("societies.id"), nullable=False)
     symptom: Mapped[str] = mapped_column(Text, nullable=False)
     severity: Mapped[int] = mapped_column(SmallInteger, nullable=False)
-    request_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
-        nullable=False,
-        unique=True,
-        name="uq_symptom_logs_request_id",
-    )
+    request_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
@@ -156,6 +151,7 @@ class SymptomLog(Base):
 
     __table_args__ = (
         CheckConstraint("severity BETWEEN 1 AND 5", name="ck_severity_1_5"),
+        UniqueConstraint("request_id", name="uq_symptom_logs_request_id"),
     )
 
 
@@ -178,12 +174,7 @@ class Escalation(Base):
         server_default=text("'OPEN'"),
     )
     transcript: Mapped[str] = mapped_column(Text, nullable=False)
-    request_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
-        nullable=False,
-        unique=True,
-        name="uq_escalations_request_id",
-    )
+    request_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
     raised_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
@@ -197,6 +188,7 @@ class Escalation(Base):
     __table_args__ = (
         CheckConstraint("level IN (1, 2, 3)", name="ck_escalations_level"),
         CheckConstraint("status IN ('OPEN', 'ACKNOWLEDGED', 'CLOSED')", name="ck_escalations_status"),
+        UniqueConstraint("request_id", name="uq_escalations_request_id"),
     )
 
 

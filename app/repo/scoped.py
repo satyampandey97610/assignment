@@ -104,12 +104,12 @@ async def search_clinic_docs_scoped(
     sql = text(
         """
         SELECT d.doc_id, d.title, d.version, c.heading_path, c.content,
-               1 - (c.embedding <=> :q::vector) AS score
+               1 - (c.embedding <=> CAST(:q AS vector)) AS score
         FROM doc_chunks c
         JOIN documents d ON d.doc_id = c.doc_id AND d.version = c.version
         WHERE d.is_current
           AND d.applies_to IN ('all', :society_id)
-        ORDER BY c.embedding <=> :q::vector
+        ORDER BY c.embedding <=> CAST(:q AS vector)
         LIMIT :k;
         """
     )

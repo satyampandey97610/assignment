@@ -49,6 +49,9 @@ def setup_test_db():
     os.environ["DATABASE_URL"] = settings.TEST_DATABASE_URL
     settings.DATABASE_URL = settings.TEST_DATABASE_URL
 
+    from app.db import reset_db_engine
+    reset_db_engine(settings.TEST_DATABASE_URL)
+
     # Run alembic upgrade head
     from alembic.config import Config
 

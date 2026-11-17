@@ -6,14 +6,18 @@ from contextlib import asynccontextmanager
 from psycopg.rows import dict_row
 from psycopg_pool import AsyncConnectionPool
 from sqlalchemy import text
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.ext.asyncio import (
+    AsyncEngine,
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine,
+)
 
 from app.config import settings
 
-engine = create_async_engine(
+engine: AsyncEngine = create_async_engine(
     settings.DATABASE_URL,
     echo=False,
-    pool_pre_ping=True,
 )
 
 AsyncSessionLocal = async_sessionmaker(
@@ -21,6 +25,18 @@ AsyncSessionLocal = async_sessionmaker(
     class_=AsyncSession,
     expire_on_commit=False,
 )
+
+
+def reset_db_engine(db_url: str | None = None) -> None:
+    """Rebind global engine and sessionmaker (used by test fixtures)."""
+    global engine, AsyncSessionLocal
+    target_url = db_url or settings.DATABASE_URL
+    engine = create_async_engine(target_url, echo=False)
+    AsyncSessionLocal = async_sessionmaker(
+        bind=engine,
+        class_=AsyncSession,
+        expire_on_commit=False,
+    )
 
 
 def get_connection_pool(db_url: str | None = None) -> AsyncConnectionPool:
