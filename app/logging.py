@@ -26,15 +26,14 @@ class JSONFormatter(logging.Formatter):
 
 
 def setup_logging(level: str = "INFO") -> logging.Logger:
-    """Configure root logger with JSON output to stdout."""
-    root = logging.getLogger()
-    root.setLevel(level.upper())
-    # Clear existing handlers
-    root.handlers.clear()
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setFormatter(JSONFormatter())
-    root.addHandler(handler)
-    return logging.getLogger("care_concierge")
+    """Configure care_concierge logger with JSON output to stdout."""
+    app_logger = logging.getLogger("care_concierge")
+    app_logger.setLevel(level.upper())
+    if not app_logger.handlers:
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setFormatter(JSONFormatter())
+        app_logger.addHandler(handler)
+    return app_logger
 
 
 logger = setup_logging()
